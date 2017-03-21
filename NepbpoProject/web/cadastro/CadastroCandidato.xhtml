@@ -1,0 +1,790 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="HandheldFriendly" content="true" />
+        <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
+        <title>Cadastro do Usuario</title>
+
+        <link href="../resources/css/bootstrap.v3.2.0.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/bootstrap-theme.v3.2.0.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../resources/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrap.v3.2.0.min.js" type="text/javascript"></script>
+        <script src="../resources/js/bootstrapValidator.js" type="text/javascript"></script>
+        <script src="../resources/js/jquery.maskMoney.js" type="text/javascript"></script>
+        <script src="../resources/js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript"></script>
+        <script src="../resources/js/formularios.js" type="text/javascript"></script>
+        <script src="../resources/js/javascript_cep.js" type="text/javascript"></script>
+        <script src="../resources/js/javascript_radioButton.js" type="text/javascript"></script>
+        <link href="../resources/css/formularios.css" rel="stylesheet" type="text/css"/>
+
+    </h:head>
+    <h:body>
+        <div class="container">
+
+            <form class="well form-horizontal" action="../Controle" method="post"  id="contact_form" accept-charset="ISO-8859-1"> 
+                <input type="hidden" name="flag" value="cadastrarCandidato"/>
+
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <!--<legend>Cadastro do Usuário</legend>-->
+                    <div class="separacao">Dados Pessoais (sem abreviaturas)</div>
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Fonte de Recrutamento:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="fonteRecrutamento" class="form-control selectpicker" onclick="habilitaCampoRecrutamento(this.value)">
+                                    <option value=" " >--selecione--</option>
+                                    <option value="Jornal" >Jornal</option>
+                                    <option value="Radio" >Radio</option>
+                                    <option value="TV" >TV</option>
+                                    <option value="Busdoor" >Busdoor</option>
+                                    <option value="Planfetagem" >Planfetagem</option>
+                                    <option value="PAT" >PAT</option>
+                                    <option value="Poupa Tempo" >Poupa Tempo</option>
+                                    <option value="Consultoria" >Consultoria</option>
+                                    <option value="Indique Amigo" >Indique Amigo</option>
+                                    <option value="Site Emprego" >Site Emprego</option>
+                                    <option value="Escola" >Escola</option>
+                                    <option value="Comercio" >Comercio</option>
+                                    <option value="Associação" >Associação</option>
+                                    <option value="Outros" >Outros</option>
+                                </select>
+
+                                <input  type="hidden" id="consultoriaNome" name="nomeConsultIndique" class="form-control" disabled="true" placeholder="Nome da Consultoria"/>
+                                <input  type="hidden" id="indiqueAmigo" name="nomeConsultIndique" class="form-control" disabled="true" placeholder="Nome do Amigo"/>
+                                <input  type="hidden" id="outrosNomes" name="nomeConsultIndique" class="form-control" disabled="true" placeholder="Qual?"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nome Completo:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input  name="nomeCompleto" placeholder="Nome Completo" class="form-control"  type="text"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">E-Mail:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input name="email" placeholder="E-Mail" class="form-control"  type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CEP-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Cep:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                <input name="cep" type="text" id="cep" value="" class="form-control" size="10" maxlength="9" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Rua:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-road"></i></span>
+                                <input name="rua" type="text" id="rua" class="form-control" size="60" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Bairro:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
+                                <input name="bairro" type="text" class="form-control" id="bairro" size="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Número:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">                                
+                                <input name="numero" type="text" class="form-control" size="8" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Complemento:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-tasks"></i></span>
+                                <input name="complemento" type="text" class="form-control" size="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Cidade:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
+                                <input name="cidade" type="text" class="form-control" id="cidade" size="40" />
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Estado:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pushpin"></i></span>
+                                <input name="uf" type="text" class="form-control" id="uf" size="2" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">IBGE:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <input name="ibge" type="text" class="form-control" id="ibge" size="8" disabled="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Naturalidade:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="pais" class="form-control selectpicker" >
+                                    <option value=" " >--selecione--</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Sexo-->
+                    <!-- Select Basic -->
+
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Sexo:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="sexo" class="form-control selectpicker" onclick="habilitaCampoReservista(this.value)">
+                                    <option value=" " >--selecione--</option>
+                                    <option value="Feminino" >Feminino</option>
+                                    <option value="Masculino" >Masculino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Idade-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Idade:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">                                
+                                <input name="idade" type="number" min="18" class="form-control" size="6" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--Estado civil-->
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Estado Civil:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="estadoCivil" class="form-control selectpicker" >
+                                    <option value=" " >--selecione--</option>
+                                    <option value="Solteiro(a)" >Solteiro(a)</option>
+                                    <option value="Casado(a)" >Casado(a)</option>
+                                    <option value="Divorciado(a)" >Divorciado(a)</option>
+                                    <option value="Viúvo(a)" >Viúvo(a)</option>
+                                    <option value="Separado(a)" >Separado(a)</option>
+                                    <option value="Companheiro(a)" >Companheiro(a)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nome da Mãe:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input  name="nomeMae" placeholder="Nome Completo" class="form-control"  type="text"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Nome do Pai:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input  name="nomePai" placeholder="Nome Completo" class="form-control"  type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Data-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Data de Nascimento:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group input-append date" >
+                                <input type="text" name="dataNascimento" id="dataNascimento" class="form-control" placeholder="dia/mes/ano"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Raça:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="raca" class="form-control selectpicker" >
+                                    <option value=" " >--selecione--</option>
+                                    <option value="Amarelo" >Amarelo</option>
+                                    <option value="Branco" >Branco</option>
+                                    <option value="Negro" >Negro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Celular:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input name="celular" id="celular" placeholder="11-95555-1212" class="form-control" type="tel" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Telefone:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                <input name="telefone" id="telefone" placeholder="11-5555-1212" class="form-control" type="tel" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Tem Filhos?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherFilho" value="sim" onclick="habilitaCampoFilhos(this.value)" onchange="habilitaCampoFilhos(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherFilho" value="nao" onclick="habilitaCampoFilhos(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="filhos" name="nomeFilhos" class="form-control" disabled="true" placeholder="Idade dos filhos"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--conduções-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Quantas Conduções Utiliza?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">                                
+                                <input name="qntConducoes" type="text" min="0" class="form-control" size="6" onchange="habilitaCampoQntConducoes(this.value)"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Qual Valor (Ida/Volta)? :</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">                                
+                                <input name="valorConducao" id="valorConducao" type="text" class="form-control" size="6" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group"> 
+                        <label class="col-md-4 control-label">Quais?:</label>
+                        <div class="col-md-4 selectContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select name="quaisTransportes" id="quaisTransportes" class="form-control selectpicker" onclick="habilitaCampoQuais(this.value)">
+                                    <option value=" " >--selecione--</option>
+                                    <option value="Onibus Municipal" >Onibus Municipal</option>
+                                    <option value="Onibus Intermunicipal" >Onibus Intermunicipal</option>
+                                    <option value="Trem" >Trem</option>
+                                    <option value="Metro" >Metro</option>
+                                    <option value="Mun. + Inter." >Mun. + Inter.</option>
+                                    <option value="Mun. + Trem" >Mun. + Trem</option>
+                                    <option value="Mun. + Metro" >Mun. + Metro</option>
+                                    <option value="Mun. + Inter. + Trem" >Mun. + Inter. + Trem</option>
+                                    <option value="Mun. + Inter. + Metro" >Mun. + Inter. + Metro</option>
+                                    <option value="Mun. + Inter. + Metro + Trem" >Mun. + Inter. + Metro + Trem</option>                                    
+                                    <option value="Inter. + Trem" >Inter. + Trem</option>
+                                    <option value="Inter. + Metro" >Inter. + Metro</option>
+                                    <option value="Inter. + Trem + Metro" >Inter. + Trem + Metro</option>
+                                    <option value="Trem + Metro" >Trem + Metro</option>
+                                    <option value="Outros" >Outros</option>
+
+                                </select>
+                                <input  type="hidden" id="outrosTransportes" name="outrosTransportes" class="form-control" disabled="true" placeholder="Quais?"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Disponibilidade de Horário:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Manhã
+                                        <input type="radio" id="manha" name="escolherHorario" value="Manhã"/> 
+                                    </label>
+                                    <label>Tarde
+                                        <input type="radio" id="tarde" name="escolherHorario" value="Tarde"/>
+                                    </label>
+                                    <label>Noite
+                                        <input type="radio" id="noite" name="escolherHorario" value="Noite"/>
+                                    </label> 
+                                    <label>Integral
+                                        <input type="radio" id="Integral" name="escolherHorario" value="Integral"/>
+                                    </label> 
+                                </span>                                
+                                <input type="text" id="especificar" name="especificarHorario" class="form-control" placeholder="Especificar"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Tem disponibilidade aos Sab e Dom?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherSabDom" value="sim"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherSabDom" value="nao"/>
+                                    </label>
+                                </span> 
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Já trabalhou na TIVIT / Neobpo?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherTivit" value="sim" onclick="habilitaCampoTivit(this.value)" onblur="habilitaCampoTivit(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherTivit" value="nao" onclick="habilitaCampoTivit(this.value)"/>
+                                    </label>
+                                </span>
+                                <input type="text" class="form-control" id="periodoTrabTivit" disabled="true" name="periodoTrabTivit" placeholder="Periodo de Trabalho"/>                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Participou de processo seletivo na TIVIT / Neobpo?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherProcTivit" value="sim" onclick="habilitaCampoProcTivit(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherProcTivit" value="nao" onclick="habilitaCampoProcTivit(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="processoSeletivo" name="processoSeletivo" class="form-control" disabled="true" placeholder="Qual Produto?"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Já trabalhou em Telemarketing?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherTelemark" value="sim" onclick="habilitaCampoTelemark(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherTelemark" value="nao" onclick="habilitaCampoTelemark(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="quantoTempo" name="quantoTempo" class="form-control" disabled="true" placeholder="Quanto tempo?"/>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                <select id="trabalhoTelemark" name="trabalhoTelemark" class="form-control selectpicker" disabled="true">
+                                    <option value=" " >escolha</option>
+                                    <option value="Ativo" >Ativo</option>
+                                    <option value="Receptivo" >Receptivo</option>
+                                    <option value="Ambos" >Ambos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Tem parentes na Neobpo?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherParentes" value="sim" onclick="habilitaCampoParente(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherParentes" value="nao" onclick="habilitaCampoParente(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="nomeParente" name="nomeParente" class="form-control" disabled="true" placeholder="Nome do parente"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">É portador de Deficiência?:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherDeficiencia" value="sim" onclick="habilitaCampoDeficiencia(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherDeficiencia" value="nao" onclick="habilitaCampoDeficiencia(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="nomeDeficiencia" name="nomeDeficiencia" class="form-control" disabled="true" placeholder="Qual?"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--********************************************************-->
+
+                    <div class="separacao"></div>
+                    <div class="separacao">Informações sobre Documentos</div>
+                    <!--cpf-->                    
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Cpf:</label>
+
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                <input type="text" class="form-control" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="Digite o CPF no formato 000.000.000-00"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--RG-->                    
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Rg:</label>
+
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                <input type="text" class="form-control" name="rg" placeholder="Número do RG"/>
+                                <input type="text" class="form-control" id="dataEmissaoRg" name="dataEmissaoRG" placeholder="Data de Emissão (01/01/1999)"/>
+                                <input type="text" class="form-control" name="orgaoEmissor" placeholder="Órgão Emissor"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--titulo eleitor-->                    
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Titúlo de Eleitor:</label>
+
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                <input type="text" class="form-control" name="tituloEleitor" placeholder="Número do Titúlo"/>
+                                <input type="text" class="form-control" name="zona" placeholder="Número da Zona"/>
+                                <input type="text" class="form-control" name="secao" placeholder="Número da Seção"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--carteira de trabalho-->                    
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Carteira de Trabalho Nº:</label>
+
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                <input type="text" class="form-control" name="carteiraTrabalho" placeholder="Número da carteira"/>
+                                <input type="text" class="form-control" name="serie" placeholder="Série"/>
+                                <input type="text" class="form-control" id="dataEmissaoClt" name="dataEmissaoCLT" placeholder="Data de Emissão (01/01/1999)"/>
+                                <input type="text" class="form-control" name="estadoEmissor" placeholder="Estado Emissor"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--carteira de trabalho-->                    
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Certificado de Reservista Nº:</label>
+
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+                                <input type="text" class="form-control" id="reservista" required="false" disabled="true" name="certificadoReservista" placeholder="Número do Reservista"/>
+                                <input type="text" class="form-control" id="categoria" required="false" disabled="true" name="categoriaReservista" placeholder="Categoria"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">PIS/PASEP:</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherPis" value="sim" onclick="habilitaCampoPis(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherPis" value="nao" onclick="habilitaCampoPis(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="pis" name="numeroPis" class="form-control" placeholder="Número" disabled="true"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--********************************************************-->
+
+                    <div class="separacao"></div>
+                    <div class="separacao">Formação Educacional</div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Ensino Médio (Instituição):</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input  name="nomeEnsinoMedio" placeholder="Nome da Instituição" class="form-control"  type="text"/>
+                                <input type="text" name="dataEnsinoMedio" id="dataEnsinoMedio" class="form-control" placeholder="dia/mes/ano"/>
+                                <input type="text" name="nomeEnsinoTecnico" id="nomeEnsinoTecnico" class="form-control" placeholder="Se técnico, especifique o curso"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Graduação (Instituição):</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input  name="nomeGraduacao" placeholder="Nome da Instituição" class="form-control"  type="text"/>
+                                <input type="text" name="dataGraduacao" id="dataGraduacao" class="form-control" placeholder="Conclusão/Previsão"/>
+                                <input type="text" name="nomeCursoGraduacao" id="nomeCursoGraducao" class="form-control" placeholder="Nome do Curso"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Pós-Graduação / Especialização (Instituição):</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input  name="nomeInstituicaoPosGraduacao" placeholder="Nome da Instituição" class="form-control"  type="text"/>
+                                <input type="text" name="dataPosGraduacao" id="dataPosGraduacao" class="form-control" placeholder="Conclusão/Previsão"/>                                
+                                <input type="text" name="nomeCursoPosGraduacao" id="nomeCursoPosGraducao" class="form-control" placeholder="Nome do Curso"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--********************************************************-->
+
+                    <div class="separacao"></div>
+                    <div class="separacao">Outros Cursos</div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Conhecimento em infomática:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <label>Word
+                                    (<input type="checkbox" name="conhecimentoInfo" value="Word"/>)
+                                </label>
+                                <label>-  Excel
+                                    (<input type="checkbox" name="conhecimentoInfo" value="Excel"/>) 
+                                </label>
+                                <label>-  Power Point
+                                    (<input type="checkbox" name="conhecimentoInfo" value="Power Point"/>) 
+                                </label>
+                                <label>-  Internet
+                                    (<input type="checkbox" name="conhecimentoInfo" value="Internet"/>) 
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Radio Button-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Conhece outro Idioma?</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <label>Sim
+                                        <input type="radio" name="escolherIdioma" value="sim" onclick="habilitaCampoIdioma(this.value)"/> 
+                                    </label>
+                                    <label>Não
+                                        <input type="radio" name="escolherIdioma" value="nao" onclick="habilitaCampoIdioma(this.value)"/>
+                                    </label>
+                                </span>                                
+                                <input type="text" id="idioma" name="idioma" class="form-control" placeholder="Qual?" disabled="true"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Text Input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Outros Cursos?:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input  name="outrosCursos" class="form-control"  type="text"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--********************************************************-->
+
+                    <div class="separacao"></div>
+                    <div class="separacao">Experiência Profissional</div>
+
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Empresa Atual/Ultima:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input type="text" name="atualUltimaEmpresa" class="form-control" placeholder="Nome da empresa"/>
+                                <input type="text" name="ultimoCargo" id="dataPosGraduacao" class="form-control" placeholder="Último Cargo"/>                                
+                                <input type="text" name="enderecoEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Endereço da empresa"/>
+                                <input type="text" name="telefoneEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Telefone"/>
+                                <input type="text" name="periodoEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Periodo"/>
+                                <input type="text" name="ultimoSalario" id="nomeCursoPosGraducao" class="form-control" placeholder="Ultimo salário"/>
+                                <input type="text" name="motivoSaida" id="nomeCursoPosGraducao" class="form-control" placeholder="Motivo da Saída"/>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Penultima Empresa:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input type="text" name="penultimaEmpresa" class="form-control" placeholder="Nome da empresa"/>
+                                <input type="text" name="penultimoCargo" id="dataPosGraduacao" class="form-control" placeholder="Último Cargo"/>                                
+                                <input type="text" name="penultimoEnderecoEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Endereço da empresa"/>
+                                <input type="text" name="penultimoTelefoneEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Telefone"/>
+                                <input type="text" name="penultimoPeriodoEmpresa" id="nomeCursoPosGraducao" class="form-control" placeholder="Periodo"/>
+                                <input type="text" name="penultimoSalario" id="nomeCursoPosGraducao" class="form-control" placeholder="Ultimo salário"/>
+                                <input type="text" name="penultimoMotivoSaida" id="nomeCursoPosGraducao" class="form-control" placeholder="Motivo da Saída"/>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="separacao"></div>
+                    <div class="separacao">Condições para Admissão</div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Cargo Pretendido:</label>  
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <input type="text" name="cargoPretendido" class="form-control" placeholder="Nome do cargo"/>
+                                <input type="text" name="pretensaoSalarial" id="dataPosGraduacao" class="form-control" placeholder="Pretensão Salarial"/>                                
+                                <select name="submeteExperiecia" class="form-control selectpicker" >
+                                    <option value=" " >Submete-se ao Período de Experiência? </option>
+                                    <option value="Sim" >Sim</option>
+                                    <option value="Não" >Não</option>
+                                </select>
+                                <select name="pagouContribuicao" class="form-control selectpicker" >
+                                    <option value=" " >Pagou a Contribuição Sindical este Ano?</option>
+                                    <option value="Sim" >Sim</option>
+                                    <option value="Não" >Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="separacao"></div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="ccol-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-primary" >Cadastrar <span class="glyphicon glyphicon-floppy-disk"></span></button>
+                            <button type="reset" class="btn btn-danger" >Limpar<span class="glyphicon glyphicon-remove"></span></button>
+
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </form>
+        </div>
+    </h:body>
+</html>
+
