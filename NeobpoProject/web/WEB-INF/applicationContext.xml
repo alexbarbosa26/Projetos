@@ -21,5 +21,16 @@
     p:password="${jdbc.password}" /-->
 
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+    
+    <http auto-config="true">
+                <intercept-url pattern="/dho/**" access="ROLE_ADMINISTRADOR"/>
+    </http>
 
+<autentication-manager>
+    <autentication-provider>
+        <user-service>
+            <user name="joao" password="joao" authorities="ROLE_VENDEDORES"/>
+            </user-service>
+    </autentication-provider>
+</autentication-manager>
 </beans>
