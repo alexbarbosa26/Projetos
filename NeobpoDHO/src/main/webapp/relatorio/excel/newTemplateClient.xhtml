@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../WEB-INF/template/Template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form >
+
+            <br/>
+            <br/>
+            <center>
+                <p:fieldset legend="Extracao de relatorio" style="margin-bottom:10px; padding: 10px; width: 500px">
+                    <h:panelGrid columns="2" cellpadding="10">
+
+                        <p:outputLabel for="cidade" value="Cidade:" />
+
+                        <p:inputText id="cidade" value="#{candidatoFiltroBean.filtro.cidade}" label="cidade"/>
+
+                        <p:outputLabel for="bairro" value="Bairro:" />
+
+                        <p:inputText id="bairro" value="#{candidatoFiltroBean.filtro.cidade}" label="bairro"/>
+
+                        <p:outputLabel for="horario" value="Disponibilidade de Horários:" />
+
+                        <p:inputText id="horario" value="#{candidatoFiltroBean.filtro.cidade}" label="bairro"/>
+
+
+                        <p:outputLabel for="dataInicio" value="Data e Hora Inicio :" />
+                        <p:calendar effect="fold"  navigator="true" locale="pt" id="dataInicio" pattern="dd/MM/yyyy" required="true"/>
+
+                        <p:outputLabel for="dataFim" value="Data e Hora Fim:" />
+                        <p:calendar navigator="true" locale="pt" id="dataFim"  pattern="dd/MM/yyyy" required="true"/>
+
+
+                    </h:panelGrid>
+
+                    <p:commandButton ajax="false" update="@form" value="Gerar Relatorio" action="#{candidatoFiltroBean.pesquisar}" icon="ui-icon-check"/>
+
+                </p:fieldset>
+            </center>
+
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup align="center">
+                    
+                    <h:commandLink value="Exportar para Excel" disabled="#{empty candidatoFiltroBean.candidatosFiltrados}">
+                        <img src="../../images/Excel.png"/>
+                        <p:dataExporter type="xls" target="candidatosTable" fileName="Relacao Candidatos" postProcessor="#{candidatoFiltroBean.posProcessarXls}"/>
+                    </h:commandLink>
+
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:dataTable id="candidatosTable" value="#{candidatoFiltroBean.candidatosFiltrados}" var="candidato"
+                         emptyMessage="Nenhum Candidato encontrado" rows="500" paginator="true" paginatorPosition="bottom"
+                         paginatorAlwaysVisible="false" style="font-size: 12px">
+
+
+
+                <p:column headerText="Cidade" style="text-align: center">
+                    <h:outputText value="#{candidato.cidade}"/>
+                </p:column>
+
+                <p:column headerText="Nome Completo" style="text-align: center">
+                    <h:outputText value="#{candidato.nomecompleto}" />
+                </p:column>
+                <p:column headerText="Estado" style="text-align: center">
+                    <h:outputText value="#{candidato.uf}" />
+                </p:column>
+                <p:column headerText="Bairro" style="text-align: center">
+                    <h:outputText value="#{candidato.bairro}" />
+                </p:column>
+                <p:column headerText="CPF" style="text-align: center">
+                    <h:outputText value="#{candidato.cpf}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email" />
+                    </f:facet>
+                    <h:outputText value="#{candidato.email}" />
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>
