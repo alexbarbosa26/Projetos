@@ -34,7 +34,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
  */
 @ManagedBean
 @RequestScoped
-public class RelatorioData implements Serializable {
+public class RelatorioData2 implements Serializable {
 
     private HttpServletResponse response;
     private FacesContext context;
@@ -44,7 +44,7 @@ public class RelatorioData implements Serializable {
     private Date dataInicio;
     private Date dataFim;
 
-    public RelatorioData() {
+    public RelatorioData2() {
         this.context = FacesContext.getCurrentInstance();
         this.response = (HttpServletResponse) context.getExternalContext().getResponse();
     }
@@ -84,9 +84,9 @@ public class RelatorioData implements Serializable {
             fecharConexao();
 
         } catch (JRException ex) {
-            Logger.getLogger(RelatorioData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioData2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(RelatorioData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioData2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -100,9 +100,9 @@ public class RelatorioData implements Serializable {
             return con;
 
         } catch (SQLException ex) {
-            Logger.getLogger(RelatorioData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioData2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(RelatorioData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioData2.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return con;
@@ -112,7 +112,7 @@ public class RelatorioData implements Serializable {
         try {
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(RelatorioData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioData2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

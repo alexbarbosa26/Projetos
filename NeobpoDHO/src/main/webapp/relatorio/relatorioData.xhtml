@@ -6,7 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <body>
-
         <ui:composition template="./../WEB-INF/template/Template.xhtml">
 
             <ui:define name="content">
@@ -18,13 +17,13 @@
             <h:panelGrid columns="2" cellpadding="10">
 
                 <p:outputLabel for="dataInicio" value="Data e Hora Inicio :" />
-                <p:calendar effect="fold"  navigator="true" locale="pt" id="dataInicio" value="#{relatorioData.dataInicio}" pattern="dd/MM/yyyy" required="true"/>
+                <p:calendar effect="fold"  navigator="true" locale="pt" id="dataInicio" value="#{EmitirData.dataInicio}" pattern="dd/MM/yyyy" required="true"/>
 
                 <p:outputLabel for="dataFim" value="Data e Hora Fim:" />
-                <p:calendar navigator="true" locale="pt" id="dataFim" value="#{relatorioData.dataFim}" pattern="dd/MM/yyyy" required="true"/>
+                <p:calendar navigator="true" locale="pt" id="dataFim" value="#{EmitirData.dataFim}" pattern="dd/MM/yyyy" required="true"/>
             </h:panelGrid>
-
-            <p:commandButton value="Gerar Relatorio" action="#{relatorioData.getRelatorio}" icon="ui-icon-check" ajax="false" onclick="this.form.target = '_blank'"/>
+            
+                <p:commandButton value="Gerar Relatorio" action="#{emitirData.emitirRelatorio}" icon="ui-icon-check" ajax="false" onclick="this.form.target = '_blank'"/>
 
 
             </p:fieldset>

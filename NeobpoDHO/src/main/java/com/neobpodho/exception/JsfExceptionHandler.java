@@ -36,7 +36,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
     public ExceptionHandler getWrapped() {
         return this.wrapped;
     }
-    
+
     @Override
     public void handle() throws FacesException {
 
@@ -60,8 +60,8 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
 
                 } else {
                     handler = true;
-                    log.error("Erro de sistema" + exception.getMessage(), exception);                    
-                    redirect("/dho/Erro.xhtml");
+                    log.error("Erro de sistema " + exception.getMessage(), exception);
+                    redirect("/Erro.xhtml");
                 }
             } finally {
                 if (handler) {

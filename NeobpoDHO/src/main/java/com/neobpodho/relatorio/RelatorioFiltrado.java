@@ -27,7 +27,18 @@ public class RelatorioFiltrado implements Serializable {
 
         if(StringUtils.isNotBlank(filtro.getCidade())){
         criteria.add(Restrictions.ilike("cidade", filtro.getCidade(), MatchMode.ANYWHERE));
-
+        }
+        if(StringUtils.isNotBlank(filtro.getBairro())){
+        criteria.add(Restrictions.ilike("bairro", filtro.getBairro(), MatchMode.ANYWHERE));
+        }
+        if(StringUtils.isNotBlank(filtro.getDisponivel())){
+        criteria.add(Restrictions.ilike("horarioDisposnivel", filtro.getDisponivel(), MatchMode.ANYWHERE));
+        }
+        if(filtro.getDataInicio()!= null){
+        criteria.add(Restrictions.ge("dataCadastroCand", filtro.getDataInicio()));
+        }
+        if(filtro.getDataFim()!= null){
+        criteria.add(Restrictions.le("dataCadastroCand", filtro.getDataFim()));
         }
         return criteria.addOrder(Order.asc("cidade")).list();
     }

@@ -6,7 +6,6 @@ import com.neobpodho.relatorio.RelatorioFiltrado;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -52,7 +51,7 @@ public class CandidatoFiltroBean implements Serializable {
 		fonteCabecalho.setFontHeightInPoints((short) 16);
 		
 		estiloCelula.setFont(fonteCabecalho);
-		estiloCelula.setFillForegroundColor(IndexedColors.BLACK.getIndex());
+		estiloCelula.setFillForegroundColor(IndexedColors.AQUA.getIndex());
 		estiloCelula.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		
 		for (int i = 0; i < cabecalho.getPhysicalNumberOfCells(); i++) {

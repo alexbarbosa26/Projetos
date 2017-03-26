@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.neobpodho.relatorio;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,14 +22,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-
-/**
- *
- * @author Ramon
- */
 @ManagedBean
 @RequestScoped
-public class RelatorioGrafico {
+public class RelatorioGrafico implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
     
     private final HttpServletResponse response;
     private final FacesContext context;
@@ -41,6 +34,7 @@ public class RelatorioGrafico {
     private InputStream stream;
     private Connection con;
 
+    
     public RelatorioGrafico() {
         this.context = FacesContext.getCurrentInstance();
         this.response = (HttpServletResponse) context.getExternalContext().getResponse();
@@ -51,7 +45,7 @@ public class RelatorioGrafico {
     */
     public void getRelatorio(){
         stream = this.getClass().getResourceAsStream("/report/GraficoBarra.jasper");
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         baos = new ByteArrayOutputStream();
         
         try {

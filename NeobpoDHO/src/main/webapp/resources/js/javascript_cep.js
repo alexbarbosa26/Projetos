@@ -1,7 +1,7 @@
         $(document).ready(function() {
 
-            function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
+            function limpa_formulÃ¡rio_cep() {
+                // Limpa valores do formulï¿½rio de cep.
                 $("#rua").val("");
                 $("#bairro").val("");
                 $("#cidade").val("");
@@ -12,13 +12,13 @@
             //Quando o campo cep perde o foco.
             $("#cep").blur(function() {
 
-                //Nova variável "cep" somente com dígitos.
+                //Nova variï¿½vel "cep" somente com dï¿½gitos.
                 var cep = $(this).val().replace(/\D/g, '');
 
                 //Verifica se campo cep possui valor informado.
                 if (cep !=="") {
 
-                    //Expressão regular para validar o CEP.
+                    //Expressï¿½o regular para validar o CEP.
                     var validacep = /^[0-9]{8}$/;
 
                     //Valida o formato do CEP.
@@ -43,21 +43,21 @@
                                 $("#ibge").val(dados.ibge);
                             } //end if.
                             else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                alert("CEP não encontrado.");
+                                //CEP pesquisado nï¿½o foi encontrado.
+                                limpa_formulÃ¡rio_cep();
+                                alert("CEP nï¿½o encontrado.");
                             }
                         });
                     } //end if.
                     else {
-                        //cep é inválido.
-                        limpa_formulário_cep();
-                        alert("Formato de CEP inválido.");
+                        //cep ï¿½ invï¿½lido.
+                        limpa_formulÃ¡rio_cep();
+                        alert("Formato de CEP invï¿½lido.");
                     }
                 } //end if.
                 else {
-                    //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
+                    //cep sem valor, limpa formulï¿½rio.
+                    limpa_formulÃ¡rio_cep();
                 }
             });
         });

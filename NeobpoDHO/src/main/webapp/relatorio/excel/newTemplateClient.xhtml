@@ -12,33 +12,35 @@
 
             <br/>
             <br/>
+            
             <center>
-                <p:fieldset legend="Extracao de relatorio" style="margin-bottom:10px; padding: 10px; width: 500px">
+                <p:fieldset legend="Extração de Relatório" style="margin-bottom:10px; padding: 8px; width: 800px">
+                    <p:messages autoUpdate="true" closable="true" />
                     <h:panelGrid columns="2" cellpadding="10">
 
                         <p:outputLabel for="cidade" value="Cidade:" />
 
-                        <p:inputText id="cidade" value="#{candidatoFiltroBean.filtro.cidade}" label="cidade"/>
+                        <p:inputText id="cidade" value="#{candidatoFiltroBean.filtro.cidade}" label="cidade" autocomplete="off"/>
 
                         <p:outputLabel for="bairro" value="Bairro:" />
 
-                        <p:inputText id="bairro" value="#{candidatoFiltroBean.filtro.cidade}" label="bairro"/>
+                        <p:inputText id="bairro" value="#{candidatoFiltroBean.filtro.bairro}" label="bairro" autocomplete="off"/>
 
-                        <p:outputLabel for="horario" value="Disponibilidade de Horários:" />
+                        <p:outputLabel for="horario" value="Horário Disponivel:" />
 
-                        <p:inputText id="horario" value="#{candidatoFiltroBean.filtro.cidade}" label="bairro"/>
+                        <p:inputText id="horario" value="#{candidatoFiltroBean.filtro.disponivel}" label="Horario" autocomplete="off"/>
 
 
-                        <p:outputLabel for="dataInicio" value="Data e Hora Inicio :" />
-                        <p:calendar effect="fold"  navigator="true" locale="pt" id="dataInicio" pattern="dd/MM/yyyy" required="true"/>
+                        <p:outputLabel for="dataInicio" value="Data Inicio :" />
+                        <p:calendar value="#{candidatoFiltroBean.filtro.dataInicio}" effect="fold"  navigator="true" locale="pt" id="dataInicio" pattern="dd/MM/yyyy" required="true" autocomplete="off"/>
 
-                        <p:outputLabel for="dataFim" value="Data e Hora Fim:" />
-                        <p:calendar navigator="true" locale="pt" id="dataFim"  pattern="dd/MM/yyyy" required="true"/>
+                        <p:outputLabel for="dataFim" value="Data Fim:" />
+                        <p:calendar value="#{candidatoFiltroBean.filtro.dataFim}" navigator="true" locale="pt" id="dataFim"  pattern="dd/MM/yyyy" required="true" autocomplete="off"/>
 
 
                     </h:panelGrid>
 
-                    <p:commandButton ajax="false" update="@form" value="Gerar Relatorio" action="#{candidatoFiltroBean.pesquisar}" icon="ui-icon-check"/>
+                    <p:commandButton ajax="false" update="@form" value="Gerar Relatório" action="#{candidatoFiltroBean.pesquisar}" icon="ui-icon-check"/>
 
                 </p:fieldset>
             </center>
